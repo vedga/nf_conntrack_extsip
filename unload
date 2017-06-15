@@ -1,0 +1,4 @@
+#!/bin/bash
+iptables -D PREROUTING -t raw -p tcp --dport 5060 -d 89.107.125.254 -j CT --helper extsip
+rmmod nf_conntrack_extsip
+iptables -t raw -L -v -n

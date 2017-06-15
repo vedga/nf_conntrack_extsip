@@ -1,0 +1,8 @@
+#!/bin/bash
+./unload
+cp nf_conntrack_extsip.ko /lib/modules/$(uname -r)/kernel/net/netfilter/
+depmod -a
+sync
+conntrack -F
+iptables -A PREROUTING -t raw -p tcp --dport 5060 -d 89.107.125.254 -j CT --helper extsip
+iptables -t raw -L -v -n
