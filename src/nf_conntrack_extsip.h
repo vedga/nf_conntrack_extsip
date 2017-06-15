@@ -221,13 +221,17 @@ enum sip_register_states {
     SIP_REGISTER_SENT,
     /* На SIP REGISTER получен 401 Unauthorized */
     SIP_REGISTER_UNAUTHORIZED,
+    /* Ошибка регистрации по причине неправильной авторизации */
+    SIP_REGISTER_DENIED,
     /* Регистрация прошла успешно */
     SIP_REGISTER_COMPLETE,
     /* Отправлен запрос SIP REGISTER для отмены регистрации */
     SIP_UNREGISTER_SENT,
     /* На SIP REGISTER получен 401 Unauthorized */
     SIP_UNREGISTER_UNAUTHORIZED,
-    /* Регистрация прошла успешно */
+    /* Ошибка отмены регистрации по причине неправильной авторизации */
+    SIP_UNREGISTER_DENIED,
+    /* Отмена регистрация прошла успешно */
     SIP_UNREGISTER_COMPLETE
 };
 

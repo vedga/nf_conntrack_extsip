@@ -12,9 +12,11 @@
 /* Время жизни callid по умолчанию в секундах */
 #define DEFAULT_EXPIRES_VALUE 3600
 
-
+/* https://wiki.sipnet.ru/index.php/SIP_%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D1%8B_%D0%B8_%D0%B8%D1%85_%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D1%8F */
 #define SIP_RESPONSE_OK             200
 #define SIP_RESPONSE_UNAUTHORIZED   401
+#define SIP_RESPONSE_FORBIDDEN      403
+#define SIP_RESPONSE_NOT_FOUND      404
 
 struct extsip_handler {
 	const char	*method;
@@ -955,6 +957,12 @@ flush:
                     ci->register_state = SIP_REGISTER_UNAUTHORIZED;
 
                     break;
+                case SIP_RESPONSE_FORBIDDEN:
+                case SIP_RESPONSE_NOT_FOUND:
+                    /* Отказ в регистрации */
+                    ci->register_state = SIP_REGISTER_DENIED;
+
+                    break;
             }
 
             break;
@@ -969,6 +977,12 @@ flush:
                 case SIP_RESPONSE_UNAUTHORIZED:
                     /* Требуется авторизация */
                     ci->register_state = SIP_UNREGISTER_UNAUTHORIZED;
+
+                    break;
+                case SIP_RESPONSE_FORBIDDEN:
+                case SIP_RESPONSE_NOT_FOUND:
+                    /* Отказ в регистрации */
+                    ci->register_state = SIP_UNREGISTER_DENIED;
 
                     break;
             }

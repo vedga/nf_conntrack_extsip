@@ -248,12 +248,16 @@ static const char *sip_register_state_name(enum sip_register_states state) {
             return "REGISTER_PROGRESS";
         case SIP_REGISTER_UNAUTHORIZED:
             return "REGISTER_PROGRESS_AUTH";
+        case SIP_REGISTER_DENIED:
+            return "REGISTER_PROGRESS_DENIED";
         case SIP_REGISTER_COMPLETE:
             return "REGISTERED";
         case SIP_UNREGISTER_SENT:
             return "UNREGISTER_PROGRESS";
         case SIP_UNREGISTER_UNAUTHORIZED:
             return "UNREGISTER_PROGRESS_AUTH";
+        case SIP_UNREGISTER_DENIED:
+            return "UNREGISTER_PROGRESS_DENIED";
         case SIP_UNREGISTER_COMPLETE:
             return "UNREGISTERED";
     }
