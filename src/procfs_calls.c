@@ -177,7 +177,10 @@ static int ct_seq_show(struct seq_file *s, void *v) {
     
     rcu_read_unlock();
     
-    seq_printf(s, "\n");
+    if(n) {
+        /* Если было выведено 0 элементов, то они реально были удалены между вызовами */
+        seq_printf(s, "\n");
+    }
     
     return 0;
 }
